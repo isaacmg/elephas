@@ -45,11 +45,12 @@ ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M -
 USER $NB_USER
 
 # Install Python 3 Tensorflow
-RUN conda install --quiet --yes 'tensorflow=0.9.0'
+RUN conda install --quiet --yes 'tensorflow=1.1.0'
 # Keras
-RUN conda install --channel https://conda.anaconda.org/KEHANG --quiet --yes 'keras=1.0.8'
+RUN conda install --channel https://conda.anaconda.org/KEHANG --quiet --yes 'keras=2.0.2'
 # Use the latest version of hyperopts (python 3.5 compatibility)
 RUN pip install https://github.com/hyperopt/hyperopt/archive/master.zip
 # Elephas for distributed spark
-RUN pip install elephas
+RUN git clone https://github.com/isaacmg/elephas elephas 
+RUN python elephas/setup.py install
 RUN pip install py4j
